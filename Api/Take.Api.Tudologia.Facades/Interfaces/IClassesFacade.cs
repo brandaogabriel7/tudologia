@@ -12,6 +12,10 @@ namespace Take.Api.Tudologia.Facades.Interfaces
         /// Creates a menu containing the available classes for Tudologia.
         /// </summary>
         Task<Select> GetClassesAvailabilityMenuAsync();
+
+        /// <summary>
+        /// Subscribes an attendee to the given class.
+        /// </summary>
         Task SubscribeAttendeeToClassAsync(SubscriptionRequest subscriptionRequest);
     }
 }
