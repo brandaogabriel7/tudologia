@@ -42,5 +42,10 @@ namespace Take.Api.Tudologia.Facades
                 Options = menuOptions.ToArray()
             };
         }
+
+        public Task SubscribeAttendeeToClassAsync(SubscriptionRequest subscriptionRequest)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

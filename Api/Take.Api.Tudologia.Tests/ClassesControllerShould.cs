@@ -10,6 +10,7 @@ using Shouldly;
 
 using Take.Api.Tudologia.Controllers;
 using Take.Api.Tudologia.Facades.Interfaces;
+using Take.Api.Tudologia.Models;
 
 using Xunit;
 
@@ -57,6 +58,26 @@ namespace Take.Api.Tudologia.Tests
 
             var okObjectResult = response as OkObjectResult;
             okObjectResult.Value.ShouldBe(availabilityMenu);
+        }
+
+        [Fact]
+        public async Task SubscribeANewAttendeeToTheGivenClassAsync()
+        {
+            var subscriptionRequest = new SubscriptionRequest
+            {
+                Attendee = new Attendee
+                {
+                    Name = "Teste",
+                    Email = "teste@testsons.test"
+                },
+                Class = "Turma 12/21"
+            };
+
+            var response = await _classesController.SubscribeAttendeeToClassAsync(subscriptionRequest);
+
+            response.ShouldBeOfType<OkResult>();
+
+            await _classesFacade.Received().SubscribeAttendeeToClassAsync(subscriptionRequest);
         }
     }
 }

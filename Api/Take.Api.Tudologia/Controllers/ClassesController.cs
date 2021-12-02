@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using Take.Api.Tudologia.Facades.Interfaces;
+using Take.Api.Tudologia.Models;
 
 namespace Take.Api.Tudologia.Controllers
 {
@@ -31,6 +32,17 @@ namespace Take.Api.Tudologia.Controllers
         {
             var availabilityMenu = await _classesFacade.GetClassesAvailabilityMenuAsync();
             return Ok(availabilityMenu);
+        }
+
+        /// <summary>
+        /// Subscribes an attendee to the given class.
+        /// </summary>
+        [HttpPost("attendees")]
+        public async Task<IActionResult> SubscribeAttendeeToClassAsync([FromBody] SubscriptionRequest subscriptionRequest)
+        {
+            await _classesFacade.SubscribeAttendeeToClassAsync(subscriptionRequest);
+
+            return Ok();
         }
     }
 }
