@@ -7,5 +7,7 @@
         public const string BLIP_BOT_KEY = "X-Bot-Key";
         public const string XML_EXTENSION = ".xml";
         public const string PROJECT_NAME = "Take.Api.Tudologia";
+
+        public const string RESOURCES_URI = "/resources";
     }
 }

@@ -14,6 +14,7 @@
     <PackageReference Include="Serilog.Exceptions" Version="5.3.1" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+    <PackageReference Include="Take.Blip.Client" Version="0.5.285" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Take.Api.Tudologia.Models\Take.Api.Tudologia.Models.csproj" />
