@@ -20,8 +20,9 @@ namespace Take.Api.Tudologia.Facades
         }
 
         /// <inheritdoc/>
-        public Task<Select> GetClassesAvailabilityMenuAsync()
+        public async Task<Select> GetClassesAvailabilityMenuAsync()
         {
+            // TODO: Implementar lógica de criação do menu de disponibilidade.
             throw new NotImplementedException();
         }
     }

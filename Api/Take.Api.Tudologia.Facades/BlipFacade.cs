@@ -18,7 +18,7 @@ namespace Take.Api.Tudologia.Facades
         /// <inheritdoc/>
         public async Task<T> GetResourceAsync<T>(string resourceKey) where T : Document
         {
-            // TODO: implement correct command to get a resource
+            // TODO: Implementar comando correto para recuperar o recurso.
             var getResourceCommand = new Command();
 
             var responseRequest = await _blipClient.ProcessCommandAsync(getResourceCommand, default);

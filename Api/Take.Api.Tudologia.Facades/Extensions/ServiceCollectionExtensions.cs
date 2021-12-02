@@ -38,6 +38,8 @@ namespace Take.Api.Tudologia.Facades.Extensions
                     .AddSingleton<IClassesFacade, ClassesFacade>()
                     .AddSingleton<IBlipFacade, BlipFacade>();
 
+            // TODO: Criar blip client e injetar como Singleton.
+
             services.AddSingleton(provider =>
             {
                 var logger = provider.GetService<ILogger>();
