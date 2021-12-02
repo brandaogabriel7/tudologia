@@ -17,7 +17,7 @@ namespace Take.Api.Tudologia.Controllers
             _classesFacade = classesFacade;
         }
 
-        [HttpGet]
+        [HttpGet("availability/menu")]
         public async Task<IActionResult> GetClassesAvailabilityMenuAsync()
         {
             var availabilityMenu = await _classesFacade.GetClassesAvailabilityMenuAsync();
