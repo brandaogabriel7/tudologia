@@ -26,8 +26,18 @@
         public BlipBotSettings BlipBotSettings { get; set; }
 
         /// <summary>
+        /// Name for the resource containing classes information.
+        /// </summary>
+        public string ClassesResourceName { get; set; }
+
+        /// <summary>
         /// Sets wether or not the API should check for Bot's permission
         /// </summary>
         public bool CheckAuthorizationKey { get; set; }
+
+        /// <summary>
+        /// Text for the availability menu.
+        /// </summary>
+        public string AvailabilityMenuText { get; set; }
     }
 }
