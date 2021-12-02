@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
+using Lime.Messaging.Resources;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,8 +14,10 @@ using Serilog.Exceptions;
 
 using Take.Api.Tudologia.Facades.Interfaces;
 using Take.Api.Tudologia.Facades.Strategies.ExceptionHandlingStrategies;
-using Take.Api.Tudologia.Models;
 using Take.Api.Tudologia.Models.UI;
+using Take.Blip.Client;
+
+using Constants = Take.Api.Tudologia.Models.Constants;
 
 namespace Take.Api.Tudologia.Facades.Extensions
 {
@@ -36,7 +40,8 @@ namespace Take.Api.Tudologia.Facades.Extensions
             services.AddSingleton(settings)
                     .AddSingleton(settings.BlipBotSettings)
                     .AddSingleton<IClassesFacade, ClassesFacade>()
-                    .AddSingleton<IBlipFacade, BlipFacade>();
+                    .AddSingleton<IBlipFacade, BlipFacade>()
+                    .AddSingleton(InstantiateBlipClient(settings.BlipBotSettings));
 
             // TODO: Criar blip client e injetar como Singleton.
 
@@ -57,6 +62,15 @@ namespace Take.Api.Tudologia.Facades.Extensions
                      .Enrich.WithProperty(APPLICATION_KEY, Constants.PROJECT_NAME)
                      .Enrich.WithExceptionDetails()
                      .CreateLogger());
+        }
+
+        private static ISender InstantiateBlipClient(BlipBotSettings blipBotSettings)
+        {
+            return new BlipClientBuilder()
+                .UsingAccessKey(blipBotSettings.Identifier, blipBotSettings.AccessKey)
+                .UsingInstance($"{Constants.PROJECT_NAME} - {Environment.MachineName}")
+                .UsingRoutingRule(RoutingRule.Instance)
+                .Build();
         }
     }
 }
