@@ -4,6 +4,8 @@ using Lime.Protocol;
 
 using Take.Api.Tudologia.Facades.Interfaces;
 using Take.Blip.Client;
+
+using Constants = Take.Api.Tudologia.Models.Constants;
 namespace Take.Api.Tudologia.Facades
 {
     public class BlipFacade : IBlipFacade
@@ -18,8 +20,11 @@ namespace Take.Api.Tudologia.Facades
         /// <inheritdoc/>
         public async Task<T> GetResourceAsync<T>(string resourceKey) where T : Document
         {
-            // TODO: Implementar comando correto para recuperar o recurso.
-            var getResourceCommand = new Command();
+            var getResourceCommand = new Command
+            {
+                Method = CommandMethod.Get,
+                Uri = new LimeUri($"{Constants.RESOURCES_URI}/{resourceKey}")
+            };
 
             var responseRequest = await _blipClient.ProcessCommandAsync(getResourceCommand, default);
 
