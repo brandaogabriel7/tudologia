@@ -271,3 +271,4 @@ __pycache__/
 
 # VS config
 **/**/launchSettings.json
+/Api/Take.Api.Tudologia/appsettings.Development.json
