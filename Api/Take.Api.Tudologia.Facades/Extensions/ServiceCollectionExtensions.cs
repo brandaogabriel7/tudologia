@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-using Take.Api.Tudologia.Facades.Strategies.ExceptionHandlingStrategies;
-using Take.Api.Tudologia.Models;
-using Take.Api.Tudologia.Models.UI;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +9,11 @@ using RestEase;
 
 using Serilog;
 using Serilog.Exceptions;
+
+using Take.Api.Tudologia.Facades.Interfaces;
+using Take.Api.Tudologia.Facades.Strategies.ExceptionHandlingStrategies;
+using Take.Api.Tudologia.Models;
+using Take.Api.Tudologia.Models.UI;
 
 namespace Take.Api.Tudologia.Facades.Extensions
 {
@@ -33,7 +34,9 @@ namespace Take.Api.Tudologia.Facades.Extensions
 
             // Dependency injection
             services.AddSingleton(settings)
-                    .AddSingleton(settings.BlipBotSettings);
+                    .AddSingleton(settings.BlipBotSettings)
+                    .AddSingleton<IClassesFacade, ClassesFacade>()
+                    .AddSingleton<IBlipFacade, BlipFacade>();
 
             services.AddSingleton(provider =>
             {
