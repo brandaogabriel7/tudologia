@@ -15,6 +15,7 @@ using Take.Api.Tudologia.Facades;
 using Take.Api.Tudologia.Facades.Interfaces;
 using Take.Api.Tudologia.Models;
 using Take.Api.Tudologia.Models.UI;
+using Take.Api.Tudologia.Tests.EqualityComparers;
 
 using Xunit;
 
@@ -42,7 +43,10 @@ namespace Take.Api.Tudologia.Tests
 
             var availabilityMenu = await _classesFacade.GetClassesAvailabilityMenuAsync();
 
-            availabilityMenu.ShouldBe(expectedAvailabilityMenu);
+            availabilityMenu.ShouldBeOfType<Select>();
+            availabilityMenu.Text.ShouldBe(AVAILABILITY_MENU_TEXT);
+
+            availabilityMenu.Options.SequenceEqual(expectedAvailabilityMenu.Options, new SelectOptionsEqualityComparer()).ShouldBeTrue();
         }
 
         public static IEnumerable<object[]> ReturnALimeMenuContainingClassesAvailabityTestCases()
