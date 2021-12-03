@@ -35,5 +35,15 @@ namespace Take.Api.Tudologia.Facades
 
             return default;
         }
+
+
+        /// <inheritdoc/>
+        public async Task UpdateResourceAsync(string resourceKey, Document resourceContent)
+        {
+            // TODO: Implementar comando correto para atualizar recurso.
+            var setResourceCommand = new Command();
+
+            await _blipClient.SendCommandAsync(setResourceCommand, default);
+        }
     }
 }
