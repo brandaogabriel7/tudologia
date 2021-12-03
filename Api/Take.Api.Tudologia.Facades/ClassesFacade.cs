@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 using Lime.Messaging.Contents;
@@ -45,10 +44,24 @@ namespace Take.Api.Tudologia.Facades
         }
 
         /// <inheritdoc/>
-        public Task SubscribeAttendeeToClassAsync(SubscriptionRequest subscriptionRequest)
+        public async Task SubscribeAttendeeToClassAsync(SubscriptionRequest subscriptionRequest)
         {
-            // TODO: Implementar lógica para adicionar participante à lista de participantes
-            throw new NotImplementedException();
+            var classesResource = await _blipFacade.GetResourceAsync<JsonDocument>(_apiSettings.ClassesResourceName);
+
+            var classesInformation = classesResource.ToDictionary(cr => cr.Key, cr => (cr.Value as JObject).ToObject<TudologiaClass>());
+            
+            var attendees = classesInformation[subscriptionRequest.ChosenClass].Attendees.ToList();
+            attendees.Add(subscriptionRequest.Attendee);
+            
+            classesInformation[subscriptionRequest.ChosenClass].Attendees = attendees;
+
+            var updatedClassesResource = new JsonDocument();
+            foreach(var classInformation in classesInformation)
+            {
+                updatedClassesResource.Add(classInformation.Key, classInformation.Value);
+            }
+
+            await _blipFacade.UpdateResourceAsync(_apiSettings.ClassesResourceName, updatedClassesResource);
         }
     }
 }
