@@ -11,5 +11,10 @@ namespace Take.Api.Tudologia.Facades.Interfaces
         /// </summary>
         /// <typeparam name="T">The type of the resource.</typeparam>
         Task<T> GetResourceAsync<T>(string resourceKey) where T : Document;
+
+        /// <summary>
+        /// Updates the resource for the given key.
+        /// </summary>
+        Task UpdateResourceAsync(string resourceKey, Document resourceContent);
     }
 }

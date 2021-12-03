@@ -70,9 +70,35 @@ namespace Take.Api.Tudologia.Tests
             response.ShouldBe(resourceContent);
         }
 
+        [Fact]
+        public async Task UpdateResourceAsync()
+        {
+            var resourceContent = new JsonDocument();
+
+            _blipClient.ProcessCommandAsync(Arg.Is(CorrectSetResourceCommand(RESOURCE_KEY, resourceContent)), Arg.Any<CancellationToken>())
+                .Returns(Task.FromResult(SuccessCommandResponse()));
+
+            await _blipFacade.UpdateResourceAsync(RESOURCE_KEY, resourceContent);
+            await _blipClient.Received().SendCommandAsync(Arg.Is(CorrectSetResourceCommand(RESOURCE_KEY, resourceContent)), Arg.Any<CancellationToken>());
+        }
+
         private static Expression<Predicate<Command>> CorrectGetResourceCommand(string resourceKey) =>
                     c => !string.IsNullOrWhiteSpace(c.Id)
                     && c.Method.Equals(CommandMethod.Get)
                     && c.Uri.Path.Equals($"{Constants.RESOURCES_URI}/{resourceKey}");
+
+        private static Expression<Predicate<Command>> CorrectSetResourceCommand<TResource>(string resourceName, TResource resource) =>
+                    c => !string.IsNullOrWhiteSpace(c.Id)
+                    && c.Method.Equals(CommandMethod.Set)
+                    && c.Uri.Path.Equals($"{Constants.RESOURCES_URI}/{resourceName}")
+                    && c.Resource.Equals(resource);
+
+        protected static Command SuccessCommandResponse()
+        {
+            return new Command
+            {
+                Status = CommandStatus.Success
+            };
+        }
     }
 }
