@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Lime.Messaging.Contents;
@@ -43,9 +44,11 @@ namespace Take.Api.Tudologia.Facades
             };
         }
 
+        /// <inheritdoc/>
         public Task SubscribeAttendeeToClassAsync(SubscriptionRequest subscriptionRequest)
         {
-            throw new System.NotImplementedException();
+            // TODO: Implementar lógica para adicionar participante à lista de participantes
+            throw new NotImplementedException();
         }
     }
 }
