@@ -70,7 +70,7 @@ namespace Take.Api.Tudologia.Tests
                     Name = "Teste",
                     Email = "teste@testsons.test"
                 },
-                Class = "Turma 12/21"
+                ChosenClass = "Turma 12/21"
             };
 
             var response = await _classesController.SubscribeAttendeeToClassAsync(subscriptionRequest);

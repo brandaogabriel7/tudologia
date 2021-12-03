@@ -3,6 +3,6 @@
     public class SubscriptionRequest
     {
         public Attendee Attendee { get; set; }
-        public string Class { get; set; }
+        public string ChosenClass { get; set; }
     }
 }
