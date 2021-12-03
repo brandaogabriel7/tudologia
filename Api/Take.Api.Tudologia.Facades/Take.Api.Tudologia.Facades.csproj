@@ -17,6 +17,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Take.Api.Tudologia.Models\Take.Api.Tudologia.Models.csproj" />
-    <ProjectReference Include="..\Take.Api.Tudologia.Services\Take.Api.Tudologia.Services.csproj" />
   </ItemGroup>
 </Project>

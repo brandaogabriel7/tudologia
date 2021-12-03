@@ -3,11 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 
-using Take.Api.Tudologia.Facades.Extensions;
-using Take.Api.Tudologia.Middleware;
-using Take.Api.Tudologia.Models;
-using Take.Api.Tudologia.Models.UI;
-
 using HealthChecks.UI.Client;
 
 using Lime.Protocol.Serialization.Newtonsoft;
@@ -23,14 +18,18 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
+using Prometheus;
+
 using Take.Api.Health.Eir.Extensions;
 using Take.Api.Security.Heimdall.Extensions;
-
-using Prometheus;
+using Take.Api.Tudologia.Facades.Extensions;
+using Take.Api.Tudologia.Middleware;
+using Take.Api.Tudologia.Models;
+using Take.Api.Tudologia.Models.UI;
 
 namespace Take.Api.Tudologia
 {
-    #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     [ExcludeFromCodeCoverage]
     public class Startup
     {
@@ -101,8 +100,7 @@ namespace Take.Api.Tudologia
                     c.SwaggerEndpoint(SWAGGER_FILE_PATH, Constants.PROJECT_NAME + API_VERSION);
                 });
 
-            app.UseHttpsRedirection()
-               .UseAuthentication()
+            app.UseAuthentication()
                .UseRouting()
                .UseHttpMetrics()
                .UseCors(POLICY)
