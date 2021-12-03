@@ -35,5 +35,17 @@ namespace Take.Api.Tudologia.Facades
 
             return default;
         }
+
+        public async Task UpdateResourceAsync(string resourceKey, Document resourceContent)
+        {
+            var setResourceCommand = new Command
+            {
+                Method = CommandMethod.Set,
+                Uri = new LimeUri($"{Constants.RESOURCES_URI}/{resourceKey}"),
+                Resource = resourceContent
+            };
+
+            await _blipClient.SendCommandAsync(setResourceCommand, default);
+        }
     }
 }
